@@ -25,7 +25,7 @@ public class EdgeFieldTest{
 
 	@Test
 	public void testGetName(){
-		assertEquals("name was instalized as 'Ben'","Ben",test.getName());
+		assertEquals("name was instalized as 'test1'","test1",test.getName());
 	}
 
 	@Test
