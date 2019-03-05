@@ -1,30 +1,44 @@
 import static org.junit.Assert.*;
 
-import javax.swing.JOptionPane;
-
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CreateDDLMySQLTest {
 
 	CreateDDLMySQL myDDL;
 	
-	EdgeTable testTable = new EdgeTable("1|test");
-	EdgeTable testTable2 = new EdgeTable("2|tester2");
+	EdgeTable testTable = new EdgeTable("1|testIntVarChar");
+	EdgeTable testTable2 = new EdgeTable("2|testBoolean");
 	
-	EdgeField[] testFields = new EdgeField[] {new EdgeField("1|testField"), new EdgeField("2|otherTestField")};
+	EdgeField[] testFields = new EdgeField[] {new EdgeField("1|id"), new EdgeField("2|testVarChar"), new EdgeField("3|testBoolean")};
 
 	@Before
 	public void setUp() throws Exception {
 		testTable.addNativeField(1);
+		testTable.addNativeField(2);
 		testTable.makeArrays();
 		
-		testTable2.addNativeField(2);
+		testTable2.addNativeField(3);
 		testTable2.makeArrays();
 		
 		testFields[0].setTableID(1);
-		testFields[1].setTableID(2);
+		testFields[0].setDisallowNull(true);
+		testFields[0].setDataType(3);
+		testFields[0].setIsPrimaryKey(true);
+		
 		testFields[1].setVarcharValue(20);
+		testFields[1].setDataType(0);
+		testFields[1].setTableID(1);
+		testFields[1].setVarcharValue(20);
+		testFields[1].setDataType(0);
+		
+		testFields[2].setTableID(2);
+		testFields[2].setDisallowNull(true);
+		testFields[2].setDataType(1);
+		testFields[2].setDefaultValue("false");
 		
 		EdgeTable[] testTables = {testTable, testTable2};
 		
@@ -52,17 +66,25 @@ public class CreateDDLMySQLTest {
 				myDDL.getProductName());
 	}
 	
+	@Test
+	public void testGenerateDatabaseName() {
+		assertEquals("Tests that if the user Clicks the cancel button that the function returns an empty string", "", myDDL.generateDatabaseName());
+	}
+	
 	
 	@Test
 	public void testGetSQLString() {
-		assertEquals("Tests that the SQL string is correct if user uses MySQLDB as the db name", "CREATE DATABASE MySQLDB;\r\n" + 
+		assertEquals("Tests that the SQL string is correct if user uses MySQLDB as the db name", 
+				"CREATE DATABASE MySQLDB;\r\n" + 
 				"USE MySQLDB;\r\n" + 
-				"CREATE TABLE test (\r\n" + 
-				"	testField VARCHAR(1),\r\n" + 
-				");\r\n" + 
-				"\r\n" + 
-				"CREATE TABLE tester2 (\r\n" + 
-				"	otherTestField VARCHAR(20),\r\n" + 
+				"CREATE TABLE testIntVarChar (\r\n" + 
+				"	id DOUBLE NOT NULL,\r\n" + 
+				"	testVarChar VARCHAR(20),\r\n" + 
+				"CONSTRAINT testIntVarChar_PK PRIMARY KEY (id)\r\n" +
+				");\r\n" +
+				"\r\n" +
+				"CREATE TABLE testBoolean (\r\n" + 
+				"	testBoolean BOOL NOT NULL DEFAULT 0,\r\n" + 
 				");\r\n" + 
 				"\r\n",
 				myDDL.getSQLString());

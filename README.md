@@ -6,3 +6,8 @@ To Build and Test the code please run the following command from the root of thi
 ```
 gradlew clean build
 ```
+
+The test results can be viewed here:
+```
+build\reports\tests\test\index.html
+```
