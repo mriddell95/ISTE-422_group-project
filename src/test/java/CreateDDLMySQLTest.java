@@ -32,8 +32,6 @@ public class CreateDDLMySQLTest {
 		testFields[1].setVarcharValue(20);
 		testFields[1].setDataType(0);
 		testFields[1].setTableID(1);
-		testFields[1].setVarcharValue(20);
-		testFields[1].setDataType(0);
 		
 		testFields[2].setTableID(2);
 		testFields[2].setDisallowNull(true);
