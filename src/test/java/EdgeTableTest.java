@@ -31,14 +31,14 @@ public class EdgeTableTest{
    
    @Test
    public void testGetRelatedFieldsArray(){
-      assertEquals("Test if not initialized", null, defaultTest.getRelatedFieldsArray());
+      assertEquals("Test if not initialized", null, test.getRelatedFieldsArray());
    }
    
    @Test
    public void testAddNativeField(){
       test.addNativeField(1);
       test.makeArrays();
-      int [] nativeTables = defaultTest.getNativeFieldsArray();
+      int [] nativeTables = test.getNativeFieldsArray();
       assertEquals("Test if 1 field is added to NativeFields Array",1, nativeTables[0]);
    }
 }
