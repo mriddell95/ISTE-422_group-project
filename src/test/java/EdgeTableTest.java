@@ -35,25 +35,10 @@ public class EdgeTableTest{
    }
    
    @Test
-   public void testSetRelatedField(){
-      //dont know how to test this assertEquals();
-   }
-   
-   @Test
    public void testAddNativeField(){
       test.addNativeField(1);
       test.makeArrays();
       int [] nativeTables = defaultTest.getNativeFieldsArray();
       assertEquals("Test if 1 field is added to NativeFields Array",1, nativeTables[0]);
-   }
-   
-   @Test
-   public void testMoveFieldUp(){
-      //dont know how to test this assertEquals();
-   }
-   
-   @Test
-   public void testMoveFieldDown(){
-      //dont know how to test this assertEquals();
    }
 }
