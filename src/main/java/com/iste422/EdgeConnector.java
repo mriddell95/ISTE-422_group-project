@@ -1,3 +1,5 @@
+package com.iste422;
+
 import java.util.StringTokenizer;
 
 public class EdgeConnector {
