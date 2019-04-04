@@ -6,6 +6,8 @@ To Run Ex 07 run the following command:
 ```
 ./gradlew clean object test
 ```
+The reason of the failure will be in the console and a more detailed reason is avalible in the file displayed in the console on the unit test failure.
+
 This will use the default test objects but you can pass in different ones with the following options below
 
 optional flags:
