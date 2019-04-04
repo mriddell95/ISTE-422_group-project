@@ -6,47 +6,61 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 
 import com.iste422.EdgeFieldTest;
+import com.iste422.EdgeTableTest;
+import org.junit.runner.notification.Failure;
+import org.gradle.api.GradleException;
 
 public class MainTester{
+	ArrayList<String[]> testObjects = new ArrayList<String[]>();
+	ArrayList<Failure> failures = new ArrayList<Failure>();
    
 	@Test
 	public void runTests(){
 		JUnitCore junit = new JUnitCore();
 		String fileName = System.getProperty("-f", "");
-		String commandLineObject = System.getProperty("-h", "");
-		ArrayList<String[]> edgeFieldTestObjects = new ArrayList<String[]>();
+		String commandLineObject = System.getProperty("-n", "");
 		if(!fileName.equals("")) {
 			File file = new File(fileName);
 			try {
 				Scanner sc = new Scanner(file);
 				while (sc.hasNextLine()) {
 					String parse = sc.nextLine();
-					String[] parameters = parse.split(",");
-					edgeFieldTestObjects.add(parameters);
+					parseLineObjects(parse);
 				}
 				sc.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}else if(!commandLineObject.equals("")) {
-			String[] objects = commandLineObject.split("^");	
-			for(String object : objects) {
-				String[] parameters = object.split(",");
-				edgeFieldTestObjects.add(parameters);
-			}	
+			parseLineObjects(commandLineObject);
 		}
 		if(!fileName.equals("") || !commandLineObject.equals("")) {
-			for(String[] edgeFieldTestObject : edgeFieldTestObjects) {
-				if(edgeFieldTestObject[0].equalsIgnoreCase("EdgeFieldTest")) {
-					EdgeFieldTest.prepare(edgeFieldTestObject[1].trim(), Integer.parseInt(edgeFieldTestObject[2].trim()), edgeFieldTestObject[3].trim(), 
-							Integer.parseInt(edgeFieldTestObject[4].trim()), Integer.parseInt(edgeFieldTestObject[5].trim()), Boolean.parseBoolean(edgeFieldTestObject[6].trim()), 
-							Boolean.parseBoolean(edgeFieldTestObject[7].trim()), edgeFieldTestObject[8].trim(), Integer.parseInt(edgeFieldTestObject[9].trim()), Integer.parseInt(edgeFieldTestObject[10].trim()));
-					junit.run(EdgeFieldTest.class);
+			for(String[] testObject : testObjects) {
+				if(testObject[0].equalsIgnoreCase("EdgeFieldTest")) {
+					EdgeFieldTest.prepare(testObject[1].trim(), Integer.parseInt(testObject[2].trim()),
+							Integer.parseInt(testObject[3].trim()), Integer.parseInt(testObject[4].trim()), Boolean.parseBoolean(testObject[5].trim()), 
+							Boolean.parseBoolean(testObject[6].trim()), testObject[7].trim(), Integer.parseInt(testObject[8].trim()), Integer.parseInt(testObject[9].trim()));
+					failures.addAll(junit.run(EdgeFieldTest.class).getFailures());
+				}else if (testObject[0].equalsIgnoreCase("EdgeTableTest")){
+					EdgeTableTest.prepare(testObject[1].trim(), Integer.parseInt(testObject[2].trim()), Integer.parseInt(testObject[3].trim()));
+					failures.addAll(junit.run(EdgeTableTest.class).getFailures());
 				}
 			}
 		}else {
-			EdgeFieldTest.prepare("1|test", 100, "test1", 35, 35, true, true, "words", 100, 1);
-			junit.run(EdgeFieldTest.class);
+			EdgeFieldTest.prepare("1|test1", 100, 35, 35, true, true, "words", 100, 1);
+			EdgeTableTest.prepare("1|test2", 1, 2);
+			failures.addAll(junit.run(EdgeFieldTest.class, EdgeTableTest.class).getFailures());
+		}
+		if(!failures.isEmpty()){
+			throw new GradleException(failures.get(0).getMessage(), failures.get(0).getException());
+		}
+	}
+
+	public void parseLineObjects(String line){
+		String[] objects = line.split("^");
+		for(String object : objects){
+			String[] parameters = object.split(",");
+			testObjects.add(parameters);
 		}
 	}
    

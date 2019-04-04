@@ -5,22 +5,20 @@ import org.junit.Before;
 import  org.junit.Test;
 
 public class EdgeFieldTest{
-	private static EdgeField  test;
-	private static String edgeField; 
-	private static int tableId;
-	private static String name;
-	private static int tableBound;
-	private static int fieldBound;
-	private static boolean disallowNull;
-	private static boolean isPrimaryKey;
-	private static String defaultValue;
-	private static int varcharValue;
-	private static int dataType;
+	EdgeField  test;
+	public static String edgeField; 
+	public static int tableId;
+	public static int tableBound;
+	public static int fieldBound;
+	public static boolean disallowNull;
+	public static boolean isPrimaryKey;
+	public static String defaultValue;
+	public static int varcharValue;
+	public static int dataType;
 	
-	public static void prepare(String edgeField, int tableId, String name, int tableBound, int fieldBound, boolean disallowNull, boolean isPrimaryKey, String defaultValue, int varcharValue, int dataType){
+	public static void prepare(String edgeField, int tableId, int tableBound, int fieldBound, boolean disallowNull, boolean isPrimaryKey, String defaultValue, int varcharValue, int dataType){
 		EdgeFieldTest.edgeField = edgeField;
 		EdgeFieldTest.tableId = tableId;
-		EdgeFieldTest.name = name;
 		EdgeFieldTest.tableBound = tableBound;
 		EdgeFieldTest.fieldBound = fieldBound;
 		EdgeFieldTest.disallowNull = disallowNull;
@@ -43,12 +41,12 @@ public class EdgeFieldTest{
 
 	@Test
 	public void testGetNumFigure(){
-		assertEquals("numFigure was instalized as 1",1,test.getNumFigure());
+		assertEquals("numFigure was initialized as " + edgeField.split("\\|")[0],Integer.parseInt(edgeField.split("\\|")[0]),test.getNumFigure());
 	}
 
 	@Test
 	public void testGetName(){
-		assertEquals("name was instalized as " + name,name,test.getName());
+		assertEquals("name was initialized as " + edgeField.split("\\|")[1],edgeField.split("\\|")[1],test.getName());
 	}
 
 	@Test

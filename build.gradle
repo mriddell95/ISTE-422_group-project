@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'java-gradle-plugin'
 
 repositories {
     mavenCentral()
@@ -7,7 +8,6 @@ repositories {
 
 dependencies {
    testCompile 'junit:junit:4.12'
-   
 }
 
 jar {
@@ -15,10 +15,6 @@ jar {
       attributes 'Main-Class': 'RunEdgeConvert'
    }
 }
-
-def String hArg;
-def String fArg;
-def String nArg;
 
 test {
 	exclude 'com/iste422/EdgeFieldTest.class'
@@ -29,9 +25,9 @@ test {
 
 task objectTest (type: Test){
 	exclude 'com/iste422/**'
-	hArg = project.findProperty("-h")
-	fArg = project.findProperty("-f")
-	nArg = project.findProperty("-n")
+	String hArg = project.findProperty("-h")
+	String fArg = project.findProperty("-f")
+	String nArg = project.findProperty("-n")
 	
 	if(hArg != null){
 		if(fArg == null && nArg == null){
@@ -42,7 +38,7 @@ task objectTest (type: Test){
 		System.out.println("-P-h: shows the help menu which displays the options")
 		System.out.println("-P-f: Allows the input of a test file with test objecst inside of it by inputing -P-f=<filename>")
 		System.out.println("-P-n: Allows the input of a test object on the commandline. Multiple objects are seperated by the ^ symbol. Example >")
-		System.out.println("-P-n=1|test, 100, test1, 35, 35, true, true, words, 100, 1")
+		System.out.println("-P-n=1|test, 100, 35, 35, true, true, words, 100, 1")
 		System.out.println("Note Test Objects always start with the test class name as the first comma seprated value")
 	}
 	systemProperty "-f", fArg
