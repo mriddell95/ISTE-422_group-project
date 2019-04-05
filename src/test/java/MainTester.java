@@ -29,7 +29,7 @@ public class MainTester{
 				}
 				sc.close();
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				throw new GradleException(e.getMessage(), e);
 			}
 		}else if(!commandLineObject.equals("")) {
 			parseLineObjects(commandLineObject);
@@ -44,6 +44,8 @@ public class MainTester{
 				}else if (testObject[0].equalsIgnoreCase("EdgeTableTest")){
 					EdgeTableTest.prepare(testObject[1].trim(), Integer.parseInt(testObject[2].trim()), Integer.parseInt(testObject[3].trim()));
 					failures.addAll(junit.run(EdgeTableTest.class).getFailures());
+				}else{
+					throw new GradleException("No Test class found with the name" + testObject[0]);
 				}
 			}
 		}else {
