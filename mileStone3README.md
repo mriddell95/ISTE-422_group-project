@@ -27,7 +27,7 @@ After the application is build go to the build/libs directory and run the follow
 chmod +x ISTE-422_group-project.jar
 ```
 
-The application is now ready for deployment to the customer
+The application is now ready for deployment to the customer. Upload the jar to the deployment server so the customer may download it from our website
 
 ## Running the application as a customer
 
