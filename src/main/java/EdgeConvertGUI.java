@@ -1,5 +1,3 @@
-package com.iste422;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -56,7 +54,7 @@ public class EdgeConvertGUI {
    static DefaultListModel dlmDTTablesAll, dlmDTFieldsTablesAll;
    static JMenuBar jmbDTMenuBar;
    static JMenu jmDTFile, jmDTOptions, jmDTHelp;
-   static JMenuItem jmiDTOpenEdge, jmiDTOpenSave, jmiDTSave, jmiDTSaveAs, jmiDTExit, jmiDTOptionsOutputLocation, jmiDTOptionsShowProducts, jmiDTHelpAbout;
+   static JMenuItem jmiDTOpenEdge, jmiDTOpenSave, jmiDTSave, jmiDTSaveAs, jmiDTExit, jmiDTOptionsOutputLocation, jmiDTOptionsShowProducts, jmiDTHelpAbout, jmiDTHelpInfo, jmiDtHelpHowTo;
    
    //Define Relations screen objects
    static JFrame jfDR;
@@ -148,6 +146,16 @@ public class EdgeConvertGUI {
       jmiDTHelpAbout.setMnemonic(KeyEvent.VK_A);
       jmiDTHelpAbout.addActionListener(menuListener);
       jmDTHelp.add(jmiDTHelpAbout);
+      
+      jmiDTHelpInfo = new JMenuItem("Info");
+      jmiDTHelpInfo.setMnemonic(KeyEvent.VK_A);
+      jmiDTHelpInfo.addActionListener(menuListener);
+      jmDTHelp.add(jmiDTHelpInfo);
+      
+      jmiDtHelpHowTo= new JMenuItem("How To");
+      jmiDtHelpHowTo.setMnemonic(KeyEvent.VK_A);
+      jmiDtHelpHowTo.addActionListener(menuListener);
+      jmDTHelp.add(jmiDtHelpHowTo);
       
       jfcEdge = new JFileChooser();
       jfcOutputDir = new JFileChooser();
@@ -1274,8 +1282,43 @@ public class EdgeConvertGUI {
          if ((ae.getSource() == jmiDTHelpAbout) || (ae.getSource() == jmiDRHelpAbout)) {
             JOptionPane.showMessageDialog(null, "EdgeConvert ERD To DDL Conversion Tool\n" +
                                                 "by Stephen A. Capperell\n" +
-                                                "© 2007-2008");
+                                                "T 2007-2008");
          }
+         if ((ae.getSource() == jmiDTHelpInfo) || (ae.getSource() == jmiDTHelpInfo)) {
+        	  JOptionPane.showMessageDialog(null, "Edge Diagrammer\n" +
+                      "Copyright T 2019 RIT\n\n"
+                      + "This program is intended to allow you to generate\n"
+                      + "appropriate statements for mySQL and in the future\n"
+                      + "several database management systems.\n"
+                      + "Currently, this application accepts an EdgeDiagrammer file and produces SQL schema.\n"
+                      + "Eventually a user will be able to replace Edge Diagrammer with\n"
+                      + "some other tool or schema description file (e.g. XML)."
+                      );
+         }
+         if ((ae.getSource() == jmiDtHelpHowTo) || (ae.getSource() == jmiDtHelpHowTo)) {
+       	  JOptionPane.showMessageDialog(null, "Welcome to the How To Section\n\n" 
+                     + "1. How to Open a new Edge File\n"
+                     + "\t\t a. Click File tab > click Open Edge File > choose the edg file from your OS file System\n"
+                     + "----------------------------------------------------------------------------------------------\n"
+                     + "2. How to Open previously worked on file\n"
+                     + "\t\t a. Click File tab > click Open Sav File > choose the sav file from your OS file System\n"
+                     + "----------------------------------------------------------------------------------------------\n"
+                     + "3. How to Modify Columns, once the file is open\n"
+                     + "\t\t a. Click the table you want to modify in the All Tables section.\n"
+                     + "\t\t Click the Column name you want to modify.\n"
+                     + "\t\t Then select one of the radio button options to specify the column type.\n"
+                     +"\t\t After the type is selected input the column specifications accordingly\n"
+                     + "----------------------------------------------------------------------------------------------\n"
+                     + "4. How to Define table relationships, once the file is open\n"
+                     +"\t\t a. Click the define relationships button on the bottom of the application.\n"
+                     +"\t\t In the top section it will show all tables with relationships.\n"
+                     +"\t\t Select one of the tables and then select the field that you will want to relate to another table.\n"
+                     +"\t\t Once you have selected both the table with relationship and the field select a related table below.\n"
+                     +"\t\t Then select a field in the related table that you will want to relate to the first field.\n"
+                     +"\t\t After selecting both fields, click the bind/unbind relationship button."
+                     
+                     );
+        }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
 } // EdgeConvertGUI

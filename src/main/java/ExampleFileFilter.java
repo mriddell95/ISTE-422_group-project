@@ -1,4 +1,3 @@
-package com.iste422;
 /*
  * Copyright (c) 2003 Sun Microsystems, Inc. All  Rights Reserved.
  * 

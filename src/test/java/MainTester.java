@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
-
-import com.iste422.EdgeFieldTest;
-import com.iste422.EdgeTableTest;
 import org.junit.runner.notification.Failure;
 import org.gradle.api.GradleException;
 

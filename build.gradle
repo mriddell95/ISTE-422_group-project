@@ -12,20 +12,25 @@ dependencies {
 
 jar {
    manifest {
-      attributes 'Main-Class': 'com.iste422.RunEdgeConvert'
+      attributes 'Main-Class': 'RunEdgeConvert'
    }
 }
 
 test {
-	exclude 'com/iste422/EdgeFieldTest.class'
-	exclude 'com/iste422/EdgeTableTest.class'
+	exclude 'EdgeFieldTest.class'
+	exclude 'EdgeTableTest.class'
     reports {
         html.enabled = true
     }         
 }
 
 task objectTest (type: Test){
-	exclude 'com/iste422/**'
+	exclude 'EdgeFieldTest.class'
+	exclude 'EdgeTableTest.class'
+	exclude 'EdgeConvertCreateDDLTest.class'
+	exclude 'EdgeConnectorTest.class'
+	exclude 'CreateDDLMySQLTest.class'
+	
 	String hArg = project.findProperty("-h")
 	String fArg = project.findProperty("-f")
 	String nArg = project.findProperty("-n")

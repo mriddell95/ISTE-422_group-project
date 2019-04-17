@@ -1,5 +1,3 @@
-package com.iste422;
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;

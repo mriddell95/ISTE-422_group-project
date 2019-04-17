@@ -1,5 +1,3 @@
-package com.iste422;
-
 import java.util.*;
 
 public class EdgeTable {
