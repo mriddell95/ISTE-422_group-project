@@ -12,7 +12,7 @@ gradlew clean build
 
 If on Linux/Mac run:
 ```
-./gradlew clean build
+gradle clean build -x validateTaskProperties
 ```
 
 If you are unable to run the command please make sure that the gradlew file is executable by running:
