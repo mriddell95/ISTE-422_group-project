@@ -25,6 +25,7 @@ public class EdgeConvertFileParser {
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
+   public boolean fileIsGood = false;
    
    public EdgeConvertFileParser(File constructorFile) {
       numFigure = 0;
@@ -293,15 +294,15 @@ public class EdgeConvertFileParser {
             br.close();
             this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             this.resolveConnectors(); //Identify nature of Connector endpoints
-         } else {
-            if (currentLine.startsWith(SAVE_ID)) { //the file chosen is a Save file created by this application
-               this.parseSaveFile(); //parse the file
-               br.close();
-               this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
-            } else { //the file chosen is something else
-               JOptionPane.showMessageDialog(null, "Unrecognized file format");
-            }
-         }
+            fileIsGood = true;
+         } else if (currentLine.startsWith(SAVE_ID)) { //the file chosen is a Save file created by this application
+	           this.parseSaveFile(); //parse the file
+	           br.close();
+	           this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
+	           fileIsGood = true;
+	    } else { //the file chosen is something else
+           JOptionPane.showMessageDialog(null, "Unrecognized file format");
+        }
       } // try
       catch (FileNotFoundException fnfe) {
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
