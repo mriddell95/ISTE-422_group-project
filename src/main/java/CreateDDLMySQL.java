@@ -1,16 +1,10 @@
-import javax.swing.*;   
-
-
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
-
-   protected String databaseName;
+   //protected String databaseName;
    //this array is for determining how MySQL refers to datatypes
-   protected String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
-   protected StringBuffer sb;
+   protected static String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
 
    public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {
       super(inputTables, inputFields);
-      sb = new StringBuffer();
    } //CreateDDLMySQL(EdgeTable[], EdgeField[])
    
    public CreateDDLMySQL() { //default constructor with empty arg list for to allow output dir to be set before there are table and field objects
@@ -102,34 +96,6 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
       } else {
          return 0;
       }
-   }
-   
-   public String generateDatabaseName() { //prompts user for database name
-      String dbNameDefault = "MySQLDB";
-      //String databaseName = "";
-
-      do {
-         databaseName = (String)JOptionPane.showInputDialog(
-                       null,
-                       "Enter the database name:",
-                       "Database Name",
-                       JOptionPane.PLAIN_MESSAGE,
-                       null,
-                       null,
-                       dbNameDefault);
-         if (databaseName == null) {
-            EdgeConvertGUI.setReadSuccess(false);
-            return "";
-         }
-         if (databaseName.equals("")) {
-            JOptionPane.showMessageDialog(null, "You must select a name for your database.");
-         }
-      } while (databaseName.equals(""));
-      return databaseName;
-   }
-   
-   public String getDatabaseName() {
-      return databaseName;
    }
    
    public String getProductName() {

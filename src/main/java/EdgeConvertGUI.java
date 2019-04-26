@@ -1041,8 +1041,9 @@ public class EdgeConvertGUI {
 
       try {
          Class<?> selectedSubclass = objSubclasses[selected].getClass();
+         Class<?> selectedSuperClass = selectedSubclass.getSuperclass();
          Method getSQLString = selectedSubclass.getMethod("getSQLString");
-         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName");
+         Method getDatabaseName = selectedSuperClass.getMethod("getDatabaseName");
          strSQLString = (String)getSQLString.invoke(objSubclasses[selected]);
          databaseName = (String)getDatabaseName.invoke(objSubclasses[selected]);
       } catch (IllegalAccessException iae) {
