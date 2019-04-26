@@ -52,6 +52,9 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                   }
                   sb.append(",\r\n"); //end of field
                }
+               if(numPrimaryKey == 0 && numForeignKey == 0) {
+            	   sb.deleteCharAt(sb.length()-3);
+               }
                if (numPrimaryKey > 0) { //table has primary key(s)
                   sb.append("CONSTRAINT " + tables[tableCount].getName() + "_PK PRIMARY KEY (");
                   for (int i = 0; i < primaryKey.length; i++) {
