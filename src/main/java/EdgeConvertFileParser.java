@@ -8,7 +8,9 @@ public class EdgeConvertFileParser {
    private FileReader fr;
    private BufferedReader br;
    private String currentLine;
-   private ArrayList alTables, alFields, alConnectors;
+   private ArrayList<EdgeConnector> alConnectors;
+   private ArrayList<EdgeTable> alTables;
+   private ArrayList<EdgeField> alFields;
    private EdgeTable[] tables;
    private EdgeField[] fields;
    private EdgeField tempField;
@@ -18,9 +20,8 @@ public class EdgeConvertFileParser {
    private String tableName;
    private String fieldName;
    private boolean isEntity, isAttribute, isUnderlined = false;
-   private int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
+   private int numFigure, numConnector, numFields, numTables;
    private int endPoint1, endPoint2;
-   private int numLine;
    private String endStyle1, endStyle2;
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
@@ -30,13 +31,12 @@ public class EdgeConvertFileParser {
    public EdgeConvertFileParser(File constructorFile) {
       numFigure = 0;
       numConnector = 0;
-      alTables = new ArrayList();
-      alFields = new ArrayList();
-      alConnectors = new ArrayList();
+      alTables = new ArrayList<EdgeTable>();
+      alFields = new ArrayList<EdgeField>();
+      alConnectors = new ArrayList<EdgeConnector>();
       isEntity = false;
       isAttribute = false;
       parseFile = constructorFile;
-      numLine = 0;
       this.openFile(parseFile);
    }
 
@@ -193,7 +193,7 @@ public class EdgeConvertFileParser {
    } // resolveConnectors()
    
    public void parseSaveFile() throws IOException { //this method is fucked
-      StringTokenizer stTables, stNatFields, stRelFields, stNatRelFields, stField;
+      StringTokenizer stTables, stNatFields, stRelFields, stField;
       EdgeTable tempTable;
       EdgeField tempField;
       currentLine = br.readLine();
@@ -288,7 +288,6 @@ public class EdgeConvertFileParser {
          br = new BufferedReader(fr);
          //test for what kind of file we have
          currentLine = br.readLine().trim();
-         numLine++;
          if (currentLine.startsWith(EDGE_ID)) { //the file chosen is an Edge Diagrammer file
             this.parseEdgeFile(); //parse the file
             br.close();

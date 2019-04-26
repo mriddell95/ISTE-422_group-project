@@ -3,15 +3,15 @@ import java.util.*;
 public class EdgeTable {
    private int numFigure;
    private String name;
-   private ArrayList alRelatedTables, alNativeFields;
+   private ArrayList<Integer> alRelatedTables, alNativeFields;
    private int[] relatedTables, relatedFields, nativeFields;
    
    public EdgeTable(String inputString) {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
-      alRelatedTables = new ArrayList();
-      alNativeFields = new ArrayList();
+      alRelatedTables = new ArrayList<Integer>();
+      alNativeFields = new ArrayList<Integer>();
    }
    
    public int getNumFigure() {
