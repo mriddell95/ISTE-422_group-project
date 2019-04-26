@@ -15,7 +15,9 @@ To build and run the application refer to our main readme.
     * We then used this property in the gui class to stop loading calling methods additional methods if it is not a edg or sav file
         * This was done because the program would become in a glitched state if a edge file was loaded then you tried to load bad file
 * We removed a bunch of unused variables and import statments from each file
+    * * It is not wise to keep unused variables and import statements for performance
 * We removed a uneeded method call in the EdgeConvertGui class
+    * It is not wise to keep unwanted method calls for performance
 * We fixed a bunch of infered generics in each file making them the appropriate types
     * This was done because those are considered unsafe operations
 * Removed variables from the MYSQL ddl class that were duplicated in the abstract class
@@ -25,7 +27,6 @@ To build and run the application refer to our main readme.
 
 
 ### What would need to change to extend the functionality to other Databases 
-
 To extend the functionality to create DDL's for another database they would need to create a java class for that database type which extends the EdgeConvertCreateDDL class.
 Then they would need to implement the createDDL, getSQLString and getProductName classes as appropriate. They may also set the product array in the EdgeConvertCreateDDL class.
 
