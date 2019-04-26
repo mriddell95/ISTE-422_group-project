@@ -82,7 +82,7 @@ public class CreateDDLMySQLTest {
 				");\r\n" +
 				"\r\n" +
 				"CREATE TABLE testBoolean (\r\n" + 
-				"	testBoolean BOOL NOT NULL DEFAULT 0,\r\n" + 
+				"	testBoolean BOOL NOT NULL DEFAULT 0\r\n" + 
 				");\r\n" + 
 				"\r\n",
 				myDDL.getSQLString());
